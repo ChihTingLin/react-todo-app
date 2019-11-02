@@ -3,23 +3,29 @@ import React from 'react'
 function TodoItem({ item, onChecked, onDelete }) {
   const itemStyle = {
     borderRadius: '5px',
-    padding: '20px 10px',
-    margin: '20px',
-    boxShadow: 'rgba(0, 0, 0, 0.3) 0px 0px 10px 0px',
+    padding: '10px 10px',
+    border: '1px solid #aaa',
+    margin: '5px 0',
     display: 'flex',
     justifyContent: 'space-between'
   }
   const { isCompleted, title } = item;
 
   return (
-    <div style={itemStyle}>
+    <div style={itemStyle} className="col-md-12">
       <input
         type="checkbox"
         checked={isCompleted}
         onChange={() => onChecked(item)}
       />
       <div>{title}</div>
-      <button type="button" onClick={() => onDelete(item.id)}>Remove</button>
+      <button
+        type="button"
+        className="btn btn-danger"
+        onClick={() => onDelete(item.id)}
+      >
+        X
+      </button>
     </div>
   )
 }

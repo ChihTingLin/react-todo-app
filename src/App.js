@@ -53,21 +53,27 @@ class App extends React.Component {
     const style = {
       padding: '10px',
       borderRadius: '25px',
-      border: 'none',
-      marginRight: '20px'
+      marginLeft: '10px',
+      border: '1px solid #aaa'
     }
     const { input, todos } = this.state;
 
     return (
-      <div style={{ width: '500px', margin: '0 auto' }}>
-        <div style={{ backgroundColor: 'lightblue', padding: '10px', margin: '10px' }}>
+      <div style={{ width: '500px', height: '100%', margin: '50px auto', position: 'relative' }}>
+        <div style={{ marginBottom: '10px' }}>
           <input
             type="text"
             style={style}
             value={input}
             onChange={this.onChangeInput}
+            className="col-md-8"
+            placeholder="Add a todo item"
           />
-          <button style={style} onClick={this.onSubmitTodo}>
+          <button
+            style={style}
+            onClick={this.onSubmitTodo}
+            className="col-md-3 btn btn-info"
+          >
             Submit
           </button>
         </div>
