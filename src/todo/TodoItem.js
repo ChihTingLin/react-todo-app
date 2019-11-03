@@ -16,7 +16,7 @@ function TodoItem({ item, onChecked, onDelete }) {
       <input
         type="checkbox"
         checked={isCompleted}
-        onChange={() => onChecked(item)}
+        onChange={() => onChecked(item.id)}
       />
       <div>{title}</div>
       <button

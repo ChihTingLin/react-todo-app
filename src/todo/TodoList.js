@@ -1,7 +1,7 @@
 import React from 'react'
 import TodoItem from './TodoItem'
 
-function TodoList({ todos, onChangeChecked, onDeleteTodo }) {
+function TodoList({ todoMap, onChangeChecked, onDeleteTodo }) {
   const listStyle = {
     border: '1px solid #333',
     height: '80%',
@@ -12,10 +12,10 @@ function TodoList({ todos, onChangeChecked, onDeleteTodo }) {
   return (
     <div style={listStyle}>
       {
-        todos.map((todo, i) =>
+        Object.keys(todoMap).map((todoId, i) =>
           <TodoItem
             key={i}
-            item={todo}
+            item={todoMap[todoId]}
             onChecked={onChangeChecked}
             onDelete={onDeleteTodo}
           />
