@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoList from './TodoList'
+import { connect } from 'react-redux';
 
 class TodoApp extends React.Component {
   constructor(props) {
@@ -87,8 +88,10 @@ class TodoApp extends React.Component {
       </div >
     );
   }
-
-
 }
 
-export default TodoApp;
+const mapStateToProps = (state) => ({
+  todo: state.todo
+})
+
+export default connect(mapStateToProps)(TodoApp);

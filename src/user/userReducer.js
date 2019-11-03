@@ -8,8 +8,17 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_USER_LIST:
+      return {
+        ...state
+      }
     case FETCH_USER_LIST_SUCCESS:
+      return {
+        ...state
+      }
     case FETCH_USER_LIST_FAILURE:
+      return {
+        ...state
+      }
     default:
       return state
 
