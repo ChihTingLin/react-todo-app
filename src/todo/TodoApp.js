@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from './TodoList'
 import { connect } from 'react-redux';
+import actionCreators from './todoActions';
 
 class TodoApp extends React.Component {
   constructor(props) {
@@ -10,71 +11,68 @@ class TodoApp extends React.Component {
 
   onChangeInput = (e) => {
     const value = e.target.value;
-    this.setState({ input: value })
+    // this.setState({ input: value })
+    this.props.dispatch(actionCreators.changeInput(value))
   }
 
   onSubmitTodo = () => {
-    const { input, todoMap, index } = this.state
-    if (!input.trim()) return
-    const todo = {
-      isCompleted: false,
-      title: input,
-      id: index
-    }
-    this.setState({
-      todoMap: { ...todoMap, [index]: todo },
-      input: '',
-      index: index + 1
-    })
+    // const { input, todoMap, index } = this.state
+    // if (!input.trim()) return
+    // const todo = {
+    //   isCompleted: false,
+    //   title: input,
+    //   id: index
+    // }
+    // this.setState({
+    //   todoMap: { ...todoMap, [index]: todo },
+    //   input: '',
+    //   index: index + 1
+    // })
+    this.props.dispatch(actionCreators.addTodo())
   }
 
   onChangeChecked = (id) => {
-    const { todoMap } = this.state;
+    // const { todoMap } = this.state;
     // const newTodo = Object.assign({}, todoMap)
     // newTodo[id] = Object.assign({}, todoMap[id])
     // newTodo[id].isCompleted = !newTodo[id].isCompleted
-    this.setState({
-      todoMap: {
-        ...todoMap,
-        [id]: {
-          ...todoMap[id],
-          isCompleted: !todoMap[id].isCompleted
-        }
-      }
-    })
+    // this.setState({
+    //   todoMap: {
+    //     ...todoMap,
+    //     [id]: {
+    //       ...todoMap[id],
+    //       isCompleted: !todoMap[id].isCompleted
+    //     }
+    //   }
+    // })
+    this.props.dispatch(actionCreators.toggleTodo(id))
   }
 
   onDeleteTodo = (id) => {
-    const { todoMap } = this.state;
-    const newTodo = { ...todoMap }
-    delete newTodo[id]
-    this.setState({ todoMap: newTodo })
+    // const { todoMap } = this.state;
+    // const newTodo = { ...todoMap }
+    // delete newTodo[id]
+    // this.setState({ todoMap: newTodo })
+    this.props.dispatch(actionCreators.deleteTodo(id))
   }
 
   render() {
-    const style = {
-      padding: '10px',
-      borderRadius: '25px',
-      marginLeft: '10px',
-      border: '1px solid #aaa'
-    }
-    const { input, todoMap } = this.state;
+    // const { todoMap } = this.state;
+    const { input, todoMap } = this.props.todo;
 
     return (
-      <div style={{ width: '500px', height: '100%', margin: '50px auto', position: 'relative' }}>
-        <div style={{ marginBottom: '10px' }}>
+      <div style={{ height: '100%', margin: '50px auto', position: 'relative' }}>
+        <div style={{ marginBottom: '10px' }} className="input-group">
           <input
             type="text"
-            style={style}
             value={input}
             onChange={this.onChangeInput}
-            className="col-md-8"
+            className="form-control"
             placeholder="Add a todo item"
           />
           <button
-            style={style}
             onClick={this.onSubmitTodo}
-            className="col-md-3 btn btn-info"
+            className="btn btn-info"
           >
             Submit
           </button>

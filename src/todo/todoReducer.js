@@ -10,20 +10,44 @@ function reducer(state = initialState, action) {
   switch (action.type) {
     case types.CHANGE_INPUT:
       return {
-        ...state
+        ...state,
+        input: action.value
       }
     case types.ADD_TODO:
+      const { input, todoMap, index } = state
+      if (!input.trim()) return state
+      const newIdx = index + 1;
       return {
-        ...state
+        ...state,
+        todoMap: {
+          ...todoMap,
+          [newIdx]: {
+            isCompleted: false,
+            title: input,
+            id: newIdx
+          }
+        },
+        index: newIdx,
+        input: ''
       }
     case types.DELETE_TODO:
+      const newTodo = { ...state.todoMap }
+      delete newTodo[action.id]
       return {
-        ...state
+        ...state,
+        todoMap: newTodo
       }
-    case types.TOGGLE_TODO:
+    case types.TOGGLE_TODO: {
+      const newTodo = { ...state.todoMap }
+      newTodo[action.id] = {
+        ...newTodo[action.id],
+        isCompleted: !newTodo[action.id].isCompleted
+      }
       return {
-        ...state
+        ...state,
+        todoMap: newTodo
       }
+    }
     default:
       return state
   }

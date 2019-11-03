@@ -8,9 +8,8 @@ const changeInput = (value) => ({
   value
 })
 
-const addTodo = (todo) => ({
-  type: ADD_TODO,
-  todo
+const addTodo = () => ({
+  type: ADD_TODO
 })
 
 const deleteTodo = (id) => ({
